@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
  use 'RRethy/vim-illuminate'                                          -- Highlight all instances of the word under the cursor.
  use 'norcalli/nvim-colorizer.lua'                                    -- Colorizer
  use 'nvim-tree/nvim-web-devicons'                                    -- optional, for file icons
-
+ use 'xiyaowong/nvim-transparent'                                     -- Transparent Background
 
  -- TOOLS --
  use 'xiyaowong/nvim-cursorword'                                      -- Highlight the word under the cursor
