@@ -6,17 +6,33 @@ vim.g.airline_theme = 'badwolf'
 vim.g.airline_cursorcolor = 1
 
 
+
+-- INDENT BLANK LINES --
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_current_context = true,
+    show_current_context_start = true,
+    char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+        "IndentBlanklineIndent3",
+        "IndentBlanklineIndent4",
+        "IndentBlanklineIndent5",
+        "IndentBlanklineIndent6",
+    },
+}
+
 -- INDENT LINES --
-vim.g.indent_blankline_char = '▏'
-vim.g.indentLine_char_list = '|', '¦', '┆', '┊'
-vim.g.indent_blankline_filetype_exclude = {'help', 'terminal', 'dashboard'}
-vim.g.indent_blankline_buftype_exclude = {'terminal'}
-vim.g.indent_blankline_show_trailing_blankline_indent = false
-vim.g.indent_blankline_show_first_indent_level = false
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_show_current_context = true
-vim.g.indent_setColors = 0
-vim.g.indent_colors = {fg = '#5c6370', bg = '#282c34'}
+-- vim.g.indent_blankline_char = '▏'
+-- vim.g.indentLine_char_list = '|', '¦', '┆', '┊'
+-- -- vim.g.indent_blankline_filetype_exclude = {'help', 'terminal', 'dashboard'}
+-- vim.g.indent_blankline_buftype_exclude = {'terminal'}
+-- vim.g.indent_blankline_show_trailing_blankline_indent = false
+-- vim.g.indent_blankline_show_first_indent_level = false
+-- vim.g.indent_blankline_use_treesitter = true
+-- vim.g.indent_blankline_show_current_context = true
+-- vim.g.indent_setColors = 0
+-- vim.g.indent_colors = {fg = '#5c6370', bg = '#282c34'}
 
 -- BARBAR --
 local map = vim.api.nvim_set_keymap

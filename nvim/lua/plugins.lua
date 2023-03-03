@@ -13,7 +13,8 @@ return require('packer').startup(function(use)
 
 
 -- APPEARANCE  --
- use 'Yggdroot/indentLine'                                            -- Indentation lines   
+ --use 'Yggdroot/indentLine'                                            -- Indentation lines   
+ use "lukas-reineke/indent-blankline.nvim"                            --  Indentation lines  
  use 'vim-airline/vim-airline'                                        -- Status bar
  use 'vim-airline/vim-airline-themes'                                 -- Status bar themes
  use 'ryanoasis/vim-devicons'                                         -- File icons
