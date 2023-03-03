@@ -67,8 +67,11 @@ vim.keymap.set('n', '<leader>tg', ':Telescope live_grep<CR>')        -- Find ins
 vim.keymap.set('n', '<leader>tt', ':Telescope<CR>')                  -- Open Telescope: Leader + t
 
 
-
-
-
+-- BARBAR --
+vim.keymap.set('n', '<leader>n', ':BufferNext<CR>')                               -- BufferNext
+vim.keymap.set('n', '<leader>c', ':BufferClose<CR>')                               -- BufferClose
+vim.keymap.set('n', '<leader>cc', ':BufferCloseAllButCurrent<CR>')                 -- BufferCloseAllButCurrent
+vim.keymap.set('n', '<leader>o', ':BufferOrderByBufferNumber<CR>')                 -- BufferOrderByBufferNumber
+vim.keymap.set('n', '<leader>p', ':BufferPin<CR>')                                 -- BufferPin
 
 
