@@ -1,0 +1,40 @@
+Host raspy4
+    HostName 192.168.0.42
+    Port 1984
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa
+
+Host raspy4b
+    HostName 192.168.0.52
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa
+
+Host raspy4c
+    HostName 192.168.0.61
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa
+
+Host raspy4d
+    HostName 192.168.0.26
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa
+
+Host raspy4e
+    HostName 192.168.0.54
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa
+
+Host raspy4f
+    HostName 192.168.0.58
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa
+
+Host raspy5
+    HostName 192.168.0.32
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa
+
+Host Hetzner
+    HostName 46.225.63.22
+    User antjrobles
+    IdentityFile ~/.ssh/id_rsa

@@ -1,0 +1,10 @@
+Host 192.168.0.61
+  HostName 192.168.0.61
+  User pimox
+
+
+Host raspy4
+  HostName 192.168.0.42
+  User antjrobles
+  Port 1984
+  IdentityFile ~/.ssh/raspy5

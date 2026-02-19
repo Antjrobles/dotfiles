@@ -1,0 +1,46 @@
+Host raspy4
+  Hostname 192.168.0.42
+  Port 1984
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B
+
+Host raspy4c
+  Hostname 192.168.0.61
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B
+
+Host raspy4d
+  Hostname 192.168.0.26
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B
+
+
+Host raspy5
+  Hostname 192.168.0.32
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B
+
+Host raspy4e
+  Hostname 192.168.0.54
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B
+
+Host raspy4f
+  Hostname 192.168.0.58
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B
+
+Host Win11
+  Hostname 192.168.0.53
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B
+
+Host Win10-Marco-Laptop
+  Hostname 192.168.0.35
+  User arobl
+  IdentityFile ~/.ssh/RASPY4B
+
+Host hetzner
+  Hostname 46.225.63.22
+  User antjrobles
+  IdentityFile ~/.ssh/RASPY4B

@@ -1,0 +1,14 @@
+[init]
+	defaultBranch = main
+[user]
+	email = antjrobles@gmail.com
+	name = Antonio Robles
+[credential]
+	helper = store
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[safe]
+	directory = /home/antjrobles/proyectos/aura
