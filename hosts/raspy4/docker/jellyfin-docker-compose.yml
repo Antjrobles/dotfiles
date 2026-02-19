@@ -1,0 +1,91 @@
+---
+services:
+  jellyfin:
+#    image: lscr.io/linuxserver/jellyfin:10.9.11ubu2404
+#    image: ghcr.io/linuxserver/jellyfin:arm64v8-10.9.11
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Madrid
+      - JELLYFIN_TRANSCODINGTHREADS=2  # Aumenta si es necesario
+    volumes:
+      - /mnt/MIHDD/Appdata/jellyfin/config:/config
+      - /mnt/MIHDD/Antonio/Peliculas:/data/movies
+      - /home/antjrobles/gdrive/Peliculas:/data/peliculas
+      # Javascript
+      - /mnt/MIHDD/Antonio/Javascript:/data/javascript
+      # Nodejs
+      - /mnt/MIHDD/Antonio/Nodejs:/data/nodejs
+      # Varios
+      - /mnt/MIHDD/Antonio/Varios:/data/varios
+      # React
+      - /mnt/MIHDD/Antonio/React:/data/react
+      # CSS
+      - /mnt/MIHDD/Antonio/CSS:/data/css
+
+############## BLUEDRIVE ################
+      # WEB-DESIGN
+      - /mnt/BLUEDRIVE/Jellyfin-Library/Web-Desing:/data/web-design
+      # DATABASES
+      - /mnt/BLUEDRIVE/Jellyfin-Library/Databases:/data/databases
+      # JAVA
+      - /mnt/BLUEDRIVE/Jellyfin-Library/Java:/data/java
+      # TESTING
+      - /mnt/BLUEDRIVE/Jellyfin-Library/Testing:/data/testing
+      # BACKEND
+      - /mnt/BLUEDRIVE/Jellyfin-Library/Backend:/data/backend
+      # FULLSTACK
+      - /mnt/BLUEDRIVE/Jellyfin-Library/FullStack:/data/fullstack
+      # NESTJS
+      - /mnt/BLUEDRIVE/Jellyfin-Library/NestJS:/data/nestjs
+      # NGIX
+      - /mnt/BLUEDRIVE/Jellyfin-Library/Nginx:/data/nginx
+      # PHP
+      - /mnt/BLUEDRIVE/Jellyfin-Library/PHP:/data/php
+      # DEVOPS
+      - /mnt/BLUEDRIVE/Jellyfin-Library/DevOps:/data/devops
+      # NETWORKING
+      - /mnt/BLUEDRIVE/Jellyfin-Library/Networking:/data/networking
+
+############## IN GOOGLE DRIVE ###################
+      # BASH - POWERSHELL
+      - /home/antjrobles/gdrive/Jellyfin-Tutorials/BASH - POWERSHELL:/data/bash-powershell
+      # EXPRESS
+      - /home/antjrobles/gdrive/Jellyfin-Tutorials/Express:/data/express
+      # C
+      - /home/antjrobles/gdrive/Jellyfin-Tutorials/C:/data/c
+      # PL/SQL
+      - /home/antjrobles/gdrive/Jellyfin-Tutorials/PL-SQL:/data/pl-sql
+
+
+############## HOME ####################
+      # TYPESCRIPT
+      - /home/antjrobles/Jellyfin-Library2/Typescript:/data/typescript
+      # LINUX
+      - /home/antjrobles/Jellyfin-Library2/Linux:/data/linux
+      # PYTHON
+      - /home/antjrobles/Jellyfin-Library2/Python:/data/python
+      # C++
+      - /home/antjrobles/Jellyfin-Library2/C++:/data/c++
+      # Angular
+      - /home/antjrobles/Jellyfin-Library2/Angular:/data/angular
+      # Docker & Kubernetes
+      - /home/antjrobles/Jellyfin-Library2/Docker & Kubernetes:/data/docker_and_kubernetes
+      # AI
+      - /home/antjrobles/Jellyfin-Library2/AI:/data/ai
+      # GO
+      - /home/antjrobles/Jellyfin-Library2/GO:/data/go
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 1900:1900 #FOR DLNA SERVER (ALSO CHANGE TO NETWORK: HOST IN PORTAINER)
+    devices:
+      - /dev/dri:/dev/dri #optional
+      - /dev/vchiq:/dev/vchiq #optional
+      - /dev/video10:/dev/video10 #optional
+      - /dev/video11:/dev/video11 #optional
+      - /dev/video12:/dev/video12 #optional
+    restart: always
+   

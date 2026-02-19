@@ -1,0 +1,17 @@
+---
+version: "2.1"
+services:
+  calibre-web:
+    image: ghcr.io/linuxserver/calibre-web:latest
+    container_name: calibre
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Madrid
+    volumes:
+      - /mnt/MIHDD/Appdata/calibreweb/config:/config
+      - /mnt/MIHDD/Appdata/calibre/config/library:/books
+    ports:
+      - 8083:8083
+    restart: unless-stopped
+    

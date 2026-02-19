@@ -1,0 +1,10 @@
+services:
+    prometheus:
+        ports:
+            - '9090:9090'
+        volumes:
+            - /mnt/MIHDD/Appdata/prometheus:/etc/prometheus
+        image: prom/prometheus
+        container_name: prometheus
+        restart: always
+

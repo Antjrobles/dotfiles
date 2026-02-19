@@ -1,0 +1,26 @@
+services:
+  transmission:
+    security_opt:
+      - seccomp:unconfined
+    image: lscr.io/linuxserver/transmission:4.1.0
+#    image: ghcr.io/linuxserver/transmission:latest
+#    image: linuxserver/transmission:4.1.0
+    container_name: transmission
+    platform: linux/arm64
+    environment:
+      - PUID=1000
+      - PGID=1001
+      - TZ=Europe/Madrid
+      # - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      # - USER=username #optional
+      # - PASS=password REDACTED
+      # - WHITELIST=iplist #optional
+      # - HOST_WHITELIST=dnsnane list #optional
+    volumes:
+      - /mnt/MIHDD/Appdata/transmission/config:/config
+      - /mnt/MIHDD/downloads:/downloads
+    ports:
+      - 9094:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped

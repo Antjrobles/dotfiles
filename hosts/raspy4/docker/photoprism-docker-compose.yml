@@ -1,0 +1,56 @@
+services:
+  photoprism:
+    image: photoprism/photoprism:preview-armv7
+    container_name: photoprism
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    ports:
+      - 2342:2342
+    environment:
+      PHOTOPRISM_DATABASE_PATH: "/photoprism/storage"
+      PHOTOPRISM_DEFAULT_TIMEZONE: "Europe/Madrid"
+      PHOTOPRISM_SPONSOR: "true"
+      PHOTOPRISM_ADMIN_USER: "Antjrobles"
+      PHOTOPRISM_ADMIN_PASSWORD: REDACTED"AiQuQDPkL8t3VF"
+      PHOTOPRISM_ORIGINALS_LIMIT: 1000
+      PHOTOPRISM_HTTP_COMPRESSION: "gzip"
+      PHOTOPRISM_DEBUG: "true"
+      PHOTOPRISM_PUBLIC: "false"
+      PHOTOPRISM_READONLY: "false"
+      PHOTOPRISM_EXPERIMENTAL: "false"
+      PHOTOPRISM_DISABLE_CLASSIFICATION: "false"
+      PHOTOPRISM_DISABLE_FACES: "false"
+      PHOTOPRISM_DISABLE_WEBDAV: "false"
+      PHOTOPRISM_DISABLE_SETTINGS: "false"
+      PHOTOPRISM_DISABLE_TENSORFLOW: "false"
+      PHOTOPRISM_DARKTABLE_PRESETS: "false"
+      PHOTOPRISM_DETECT_NSFW: "false"
+      PHOTOPRISM_UPLOAD_NSFW: "true"
+      PHOTOPRISM_DATABASE_DRIVER: "mysql"
+      PHOTOPRISM_DATABASE_SERVER: "mariadb:3306"
+      PHOTOPRISM_DATABASE_NAME: "npm"
+      PHOTOPRISM_DATABASE_USER: "npm"
+      PHOTOPRISM_DATABASE_PASSWORD: REDACTED"npm"
+      PHOTOPRISM_SITE_URL: "http://192.168.0.26:2342/"
+      PHOTOPRISM_SITE_TITLE: "PhotoPrism"
+      PHOTOPRISM_SITE_CAPTION: "Browse Your Life"
+      PHOTOPRISM_SITE_DESCRIPTION: ""
+      PHOTOPRISM_SITE_AUTHOR: "Antjrobles"
+    volumes:
+      - /mnt/BLUEDRIVE/Syncthing-fotos-raspy4c/Fotos-camara:/photoprism/originals:cached
+      - /mnt/BLUEDRIVE/Syncthing-fotos-raspy4c/WhatsApp-images:/photoprism/originals/whatsapp:cached
+      - "./storage:/photoprism/storage:cached"
+
+  mariadb:
+    image: 'yobasystems/alpine-mariadb'
+    container_name: photoprismdb
+    environment:
+      MYSQL_ROOT_PASSWORD: REDACTED
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: REDACTED
+    volumes:
+      - ./data/mysql:/var/lib/mysql:cached
+    restart: unless-stopped

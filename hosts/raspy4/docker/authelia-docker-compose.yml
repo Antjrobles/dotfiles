@@ -1,0 +1,36 @@
+networks:
+  frontend:
+    external: true
+  backend:
+
+services:
+  authelia:
+    container_name: authelia-app
+    image: authelia/authelia:latest
+    volumes:
+      - ./config:/config
+    ports:
+     - 9098:9091
+    restart: unless-stopped
+    healthcheck:
+      disable: false
+    environment:
+      - TZ=Europe/Madrid 
+    depends_on:
+      - redis
+    networks:
+      - frontend
+      - backend
+
+  redis:
+    container_name: authelia-redis
+    image: redis:alpine
+    volumes:
+      - ./redis:/data
+    ports:
+      - 6378:6379
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Madrid
+    networks:
+      - backend

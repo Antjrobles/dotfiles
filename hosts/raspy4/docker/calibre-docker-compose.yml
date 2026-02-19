@@ -1,0 +1,19 @@
+---
+version: "2.1"
+services:
+  calibre:
+#    image: lscr.io/linuxserver/calibre:arch-version-a5b00e5e
+    image: linuxserver/calibre:v7.18.0-ls302
+    container_name: calibre-app
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Madrid
+      - PASSWORD= REDACTED
+      - CLI_ARGS= #optional
+    volumes:
+      - /mnt/MIHDD/Appdata/calibre/config:/config
+    ports:
+      - 8034:8080
+      - 8081:8081
+    restart: unless-stopped

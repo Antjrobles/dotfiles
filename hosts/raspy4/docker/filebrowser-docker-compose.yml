@@ -1,0 +1,16 @@
+---
+services:
+  file-browser:
+    image: filebrowser/filebrowser:latest
+    container_name: file-browser
+    environment:
+      - PUID=1001
+      - PGID=1001
+    ports:
+      - 8089:80
+    volumes:
+      - /:/srv
+      - /mnt/MIHDD/Appdata/filebrowser/filebrowser.db:/database.db
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
