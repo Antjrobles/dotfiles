@@ -1,0 +1,9 @@
+services:
+    it-tools:
+        image: corentinth/it-tools
+        tty: true
+        stdin_open: true
+        ports:
+            - '8310:80'
+        container_name: it-tools
+        restart: always

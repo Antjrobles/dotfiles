@@ -1,0 +1,56 @@
+services:
+  odoo:
+    image: odoo:latest
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config/odoo.conf:/etc/odoo/odoo.conf
+      - ./addons:/mnt/extra-addons
+    labels:
+      glance.name: Odoo
+      glance.icon: di:odoo
+      glance.url: https://odoo.antjrobles.tech
+      glance.description: ERP
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    networks:
+      - odoo_network
+    container_name: odoo
+    restart: always
+    command: odoo --dev=all
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/
+    networks:
+      - odoo_network
+    container_name: odoodb
+    labels:
+      glance.parent: odoo
+      glance.name: Postgres
+      glance.icon: di:postgres
+    restart: always
+    command: ["postgres", "-c", "listen_addresses=*"]
+
+networks:
+  odoo_network:
+    driver: bridge
+
+volumes:
+  odoo-web-data:
+  odoo-config:
+  odoo-db-data:

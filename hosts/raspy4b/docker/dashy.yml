@@ -1,0 +1,28 @@
+services:
+    dashy:
+        ports:
+            - '8295:80'
+#        environment:
+#            - BASE_URL=https://dashy.antjrobles.tech
+        volumes:
+            - './public/conf.yml:/app/public/conf.yml'
+            - '/home/antjrobles/appdata/dashy/icons:/app/public/item-icons/icons'
+        container_name: dashy
+        restart: always
+        image: 'lissy93/dashy:2.1.2'
+
+#lissy93/dashy:2.1.2           
+
+
+
+
+
+
+
+
+
+
+
+
+
+

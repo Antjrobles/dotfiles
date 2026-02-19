@@ -1,0 +1,21 @@
+services:
+  # LocalGuard Core: El cerebro en la Raspy 5
+  core:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: localguard-core
+    restart: unless-stopped
+    ports:
+      - "8085:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./.env:/app/.env
+    networks:
+      - localguard-net
+
+networks:
+  localguard-net:
+    driver: bridge

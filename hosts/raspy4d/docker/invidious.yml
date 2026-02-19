@@ -1,0 +1,36 @@
+services:
+  invidious:
+    image: quay.io/invidious/invidious:latest-arm64
+    restart: unless-stopped
+    container_name: invidious
+    ports:
+      - "3658:3000"
+    environment:
+      INVIDIOUS_CONFIG: |
+        db:
+          dbname: invi
+          user: invi
+          password: invi
+          host: invidious-db
+          port: 5432
+        check_tables: true
+        # external_port:
+        # domain:
+        # https_only: false
+        # statistics_enabled: false
+        hmac_key: "244c6127a83be75f61e045713e58f194c1cb091754c66abb340ff64931814f45"
+  invidious-db:
+    image: docker.io/library/postgres:14
+    restart: unless-stopped
+    container_name: invidious-db
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+      - ./config/sql:/config/sql
+      - ./docker/init-invidious-db.sh:/docker-entrypoint-initdb.d/init-invidious-db.sh
+    environment:
+      POSTGRES_DB: invi
+      POSTGRES_USER: invi
+      POSTGRES_PASSWORD: invi
+
+volumes:
+  postgresdata:

@@ -1,0 +1,24 @@
+---
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
+    volumes:
+      - ./mariadb/config:/config
+    ports:
+      - 3319:3306
+    labels:
+      - wud.watch=true
+      - wud.display.name=Mariquilla DB
+      - wud.display.icon=si:mariadb
+    restart: unless-stopped
+#    command: --bind-address=0.0.0.0

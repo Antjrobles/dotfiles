@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: umami-db
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: umami
+    volumes:
+      - umami-db-data:/var/lib/postgresql/data
+    restart: always
+
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    container_name: umami
+    ports:
+      - "3086:3000"
+    environment:
+      DATABASE_URL: postgresql://umami:umami@db:5432/umami
+      DATABASE_TYPE: postgresql
+      APP_SECRET: 40f22e49b60cfe8a526708b22c5f2f35250d9132e2d21c3fe18b89a174ea273a
+    depends_on:
+      - db
+    restart: always
+    labels:
+      glance.name: Umami
+      glance.icon: di:umami
+      glance.url: https://umami.antjrobles.tech
+      glance.description: WebSites Monitor
+
+volumes:
+  umami-db-data:

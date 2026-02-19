@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:16
+    env_file: .env
+    container_name: linkwardendb
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  linkwarden:
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+    restart: always
+    container_name: linkwarden
+    image: ghcr.io/linkwarden/linkwarden:v2.13.0
+#    image: ghcr.io/linkwarden/linkwarden:v2.9.3
+    ports:
+      - 3695:3000
+    volumes:
+      - ./data:/data/data
+    depends_on:
+      - postgres
+
+
+# OLLAMA_HOST=0.0.0.0 ollama serve 

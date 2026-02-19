@@ -1,0 +1,19 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    ports:
+      - "4533:4533"
+    environment:
+      ND_SCANSCHEDULE: 24h
+      ND_LOGLEVEL: info
+#      ND_BASEURL: "navidrome.antjrobles.tech"
+      ND_SPOTIFY_ID: 91746786fa934f3aa3adfabb0fe81d5d
+      ND_SPOTIFY_SECRET: 6612e145de684a929b526342426118e2
+      ND_IMAGECACHESIZE: 100MB
+      ND_UIWELCOMEMESSAGE: Welcome To Antjrobles's Music Library
+      
+    volumes:
+      - "./data:/data"
+      - "/home/antjrobles/gdrive/Musica:/music:ro"
+    restart: unless-stopped

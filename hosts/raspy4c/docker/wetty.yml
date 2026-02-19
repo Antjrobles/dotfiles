@@ -1,0 +1,13 @@
+---
+version: '3.3'
+services:
+    wetty:
+        ports:
+            - '3469:3000'
+        image: wettyoss/wetty
+        environment:
+          #  - SSHPORT=1984
+            - SSHHOST=192.168.0.61
+            - TITLE= RASPY4C SSH SERVER
+        container_name: wettyos
+        restart: alwaysENDFILE

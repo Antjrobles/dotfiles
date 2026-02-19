@@ -1,0 +1,12 @@
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: always
+    ports:
+      - "7279:80"  # Cambia el puerto de acceso a 7278
+    environment:
+      - WEBSOCKET_ENABLED=true
+    volumes:
+      - ./vw-data:/data

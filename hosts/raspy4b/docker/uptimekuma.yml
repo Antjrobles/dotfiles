@@ -1,0 +1,10 @@
+services:
+  uptime-kuma:
+    restart: always
+    ports:
+      - 3001:3001
+    volumes:
+      - /home/antjrobles/appdata/uptimekuma/:/app/data
+    container_name: uptime-kuma
+    image: louislam/uptime-kuma
+networks: {}

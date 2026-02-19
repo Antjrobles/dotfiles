@@ -1,0 +1,47 @@
+
+networks:
+  discount-bandit:
+    driver: bridge
+
+volumes:
+  discount-bandit:
+  discount-bandit-logs:
+
+services:
+  discount-bandit:
+    image: cybrarist/discount-bandit:latest
+    container_name: discount-bandit
+#    build:
+#      context: .
+    ports:
+      - 8080:80
+    networks:
+      - discount-bandit
+#    volumes:
+#      - discount-bandit:/app
+#      - discount-bandit-logs:/logs
+    restart: always
+    volumes:
+      - /home/antjrobles/appdata/Discount-Bandit/database/database.sqlite:/app/database/database.sqlite
+      - ./.env:/app/.env
+      - ./logs:/logs
+    environment:
+      DB_CONNECTION: sqlite
+      NTFY_CHANNEL_ID: "discount-bandit"
+      NTFY_BASE_URL: "https://ntfy.antjrobles.tech"
+      TELEGRAM_BOT_TOKEN: ""
+      TELEGRAM_CHANNEL_ID: ""
+      DEFAULT_USER: "test"
+      DEFAULT_EMAIL: "docker@test.com"
+      DEFAULT_PASSWORD: REDACTED
+      APPRISE_URL: ""
+      APP_TIMEZONE: Europe/Madrid
+      RSS_FEED: 1
+      TOP_NAVIGATION: 0
+      DISABLE_TOP_BAR: 0
+      BREADCRUMBS: 1
+      SPA: 1
+      DISABLE_AUTH: 1
+      THEME_COLOR: Stone
+#      APP_URL: "http://localhost:8080"
+#      ASSET_URL: "http://localhost:8080"

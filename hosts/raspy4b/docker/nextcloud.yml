@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mariadb:11.4
+    container_name: nextcloud_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: cambiameroot
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: cambiamedb
+    volumes:
+      - ./db:/var/lib/mysql
+
+  nextcloud:
+    image: nextcloud:29-apache
+    container_name: nextcloud
+    restart: unless-stopped
+    ports:
+      - "8457:80"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: cambiamedb
+      TZ: Europe/Madrid
+    depends_on:
+      - db
+    volumes:
+      - ./html:/var/www/html
+      - ./apps:/var/www/html/custom_apps
+      - ./config:/var/www/html/config
+      - ./data:/var/www/html/data
+

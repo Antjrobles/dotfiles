@@ -1,0 +1,11 @@
+services:
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    ports:
+      - 9086:9093
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    restart: always
+    deploy:
+      mode: global

@@ -1,0 +1,25 @@
+---
+services:
+  obsidian:
+    image: lscr.io/linuxserver/obsidian:latest
+    container_name: obsidian
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - ./config:/config
+    ports:
+      - 3057:3000
+      - 3058:3001
+    devices:
+      - /dev/dri:/dev/dri #optional
+    labels:
+      glance.name: Obsidian
+      glance.icon: di:obsidian
+      glance.url: https://obsidian.antjrobles.tech
+      glance.description: Docs & Notes
+    shm_size: "2gb"
+    restart: unless-stopped

@@ -1,0 +1,20 @@
+version: '2.1'
+services:
+  trilium:
+    container_name: trillium
+    image: triliumnext/notes
+    restart: always
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+    ports:
+      - "8481:8080"
+    volumes:
+      - ${TRILIUM_DATA_DIR:-~/trilium-data}:/home/node/trilium-data
+    labels:
+      glance.name: Trilium
+      glance.icon: di:triliumnext
+      glance.url: https://trilium.antjrobles.tech
+      glance.description: Docs & Notes
+
+volumes:
+  trilium:

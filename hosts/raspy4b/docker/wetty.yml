@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+    wetty:
+        ports:
+            - '3469:3000'
+        image: wettyoss/wetty
+        environment:
+            - SSHPORT=22
+            - SSHHOST=192.168.0.52
+            - TITLE= RASPY4B SSH SERVER
+        container_name: wettyos
+        restart: always
+        #        command: --ssh-host=192.168.0.52 && --ssh-port=1984 

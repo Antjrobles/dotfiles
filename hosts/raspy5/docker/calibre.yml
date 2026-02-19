@@ -1,0 +1,33 @@
+---
+version: "2.1"
+services:
+  calibre:
+#    image: lscr.io/linuxserver/calibre:arch-version-a5b00e5e
+    image: linuxserver/calibre:v7.18.0-ls302
+    container_name: calibre-app
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - PASSWORD= #optional
+      - CLI_ARGS= #optional
+    volumes:
+      - ./config:/config
+    ports:
+      - 8034:8080
+      - 8081:8081
+    labels:
+      glance.name: Calibre
+      glance.icon: di:calibre
+      glance.url: https://calibre.antjrobles.tech
+      glance.description: Library Manager
+    restart: unless-stopped
+
+## A ejecutar en cada reinicio
+# sshfs -p 1984 antjrobles@192.168.0.42:/mnt/MIHDD/Books /home/antjrobles/appdata/calibre/config/Biblioteca\ de\ calibre\   
+# sshfs -p 1984 antjrobles@192.168.0.42:/mnt/MIHDD/Books /home/antjrobles/appdata/calibre/config/Libreria
+
+## Comprobar
+# df -h
+# sudo findmnt --verify
+

@@ -1,0 +1,9 @@
+services:
+    prometheus:
+        ports:
+            - '9067:9090'
+        volumes:
+            - /home/antjrobles/appdata/prometheus:/etc/prometheus
+        image: prom/prometheus
+        container_name: prometheus
+        restart: always

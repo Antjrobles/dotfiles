@@ -1,0 +1,14 @@
+---
+version: '3.1'
+services:
+  alertmanager:
+    image: prom/blackbox-exporter
+    container_name: blackbox
+    ports:
+      - 9117:9115
+    volumes:
+       - ./blackbox/:/etc/blackbox/
+       - /etc/blackboxexporter/:/home/antjrobles/appdata/prometheus/
+    command:
+       - '--config.file=/etc/blackboxexporter/config.yml'
+    restart: always

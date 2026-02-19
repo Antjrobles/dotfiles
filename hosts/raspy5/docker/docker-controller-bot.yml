@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+    docker-controller-bot:
+        environment:
+            - TELEGRAM_TOKEN=REDACTED
+            - TELEGRAM_ADMIN=805841226
+            - CONTAINER_NAME=docker-controller-bot
+            #- TELEGRAM_GROUP=
+            #- TELEGRAM_THREAD=1
+            #- CHECK_UPDATES=1
+            - CHECK_UPDATE_EVERY_HOURS=168
+            #- BUTTON_COLUMNS=2
+            #- LANGUAGE=ES
+            #- EXTENDED_MESSAGES=0
+#            - DOCKER_HOST=tcp://192.168.0.33:4243  #RASPY2
+#            - DOCKER_HOST=tcp://192.168.0.42:4243  #RASPY4
+#            - DOCKER_HOST=tcp://192.168.0.52:4243  #RASPY4B
+#            - DOCKER_HOST=tcp://192.168.0.26:4243  #RASPY4D
+#            - DOCKER_HOST=tcp://192.168.0.32:2375  #RASPY5
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /etc/localtime:/etc/localtime:ro
+        image: dgongut/docker-controller-bot:latest
+        container_name: docker-controller-bot
+        restart: always
+        network_mode: host
+        labels:
+          glance.name: Docker Controller Bot
+          glance.icon: di:docker-moby
+          glance.description: Containers updates
+        tty: true

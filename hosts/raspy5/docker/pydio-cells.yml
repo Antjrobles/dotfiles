@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  pydio-cells:
+    image: lscr.io/linuxserver/pydio-cells:latest
+    container_name: pydio-cells
+    hostname: pydio-cells
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - EXTERNALURL=https://pydio.antjrobles.tech
+      - SERVER_IP=0.0.0.0
+      - CELLS_SYSTEM_PASSWORD=supersecretpassword123
+    volumes:
+      - /home/antjrobles/appdata/pydio-cells/config:/config
+      - /home/antjrobles/appdata/pydio-cells/data:/data
+    ports:
+      - "8015:8080"
+    depends_on:
+      - mariadb
+    networks:
+      - pydio_network
+    restart: unless-stopped
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: pydio-mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - MYSQL_ROOT_PASSWORD=pydio
+      - MYSQL_DATABASE=pydio
+      - MYSQL_USER=pydio
+      - MYSQL_PASSWORD=pydio
+    volumes:
+      - /home/antjrobles/appdata/pydio-cells/mariadb:/config
+    networks:
+      - pydio_network
+    restart: unless-stopped
+
+networks:
+  pydio_network:
+    driver: bridge

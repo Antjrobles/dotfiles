@@ -1,0 +1,25 @@
+---
+services:
+  chrome:
+    image: lscr.io/linuxserver/chromium:latest
+    container_name: chrome
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - CHROME_CLI=https://www.linuxserver.io/ #optional
+    volumes:
+      - ./config:/config
+    ports:
+      - 6903:3000
+      - 6904:3001
+    shm_size: "1gb"
+    restart: unless-stopped
+    labels:
+      glance.name: Chrome
+      glance.icon: di:chrome
+      glance.url: https://chrome.antjrobles.tech
+      glance.description: Chrome Browser
+    restart: unless-stopped

@@ -1,0 +1,26 @@
+version: '2'
+services:
+  app:
+    container_name: filestash
+    image: machines/filestash
+    restart: always
+    environment:
+    - APPLICATION_URL=
+#    - GDRIVE_CLIENT_ID=404160091638-ee88kj4n68dobism9jv3jlhq5bb92bfq.apps.googleusercontent.com
+#    - GDRIVE_CLIENT_SECRET=REDACTED
+#    - DROPBOX_CLIENT_ID=<dropbox_key>
+#    - ONLYOFFICE_URL=http://onlyoffice
+    ports:
+    - "8335:8334"
+    volumes:
+    - filestash:/app/data/state/
+
+#  onlyoffice:
+#    container_name: filestash_oods
+#    image: onlyoffice/documentserver
+#    restart: always
+#    security_opt:
+#      - seccomp:unconfined
+
+volumes:
+    filestash: {}

@@ -1,0 +1,25 @@
+services:
+  openvscode-server:
+    image: lscr.io/linuxserver/openvscode-server:latest
+    container_name: openvscode-server
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Madrid
+      - CONNECTION_TOKEN=
+      - CONNECTION_SECRET=
+      - SUDO_PASSWORD=password
+      - SUDO_PASSWORD_HASH=
+      - HOME=/config
+    labels:
+      glance.name: VsCode
+      glance.icon: di:vscode
+      glance.url: https://openvscode.antjrobles.tech
+      glance.description: Code Editor
+    volumes:
+      - ./config:/config
+      - ./projects:/home/code/projects
+      - /:/host
+    privileged: true
+    restart: unless-stopped
+    network_mode: host

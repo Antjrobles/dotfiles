@@ -1,0 +1,15 @@
+version: '2'
+services:
+    prometheus:
+        ports:
+            - '9072:9090'
+        volumes:
+            - /home/antjrobles/appdata/prometheus:/etc/prometheus
+        image: prom/prometheus
+        container_name: prometheus
+        labels:
+          glance.name: Prometheus
+          glance.icon: di:prometheus
+          glance.url: https://prometheus.antjrobles.tech
+          glance.description: Postgres DB Management
+        restart: always

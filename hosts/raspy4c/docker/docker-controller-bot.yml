@@ -1,0 +1,24 @@
+services:
+    docker-controller-bot:
+        image: antjrobles/docker-controller-bot:multi-server
+        container_name: docker-controller-bot
+        environment:
+            - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+            - TELEGRAM_ADMIN=805841226
+            - CONTAINER_NAME=docker-controller-bot
+            - CHECK_UPDATE_EVERY_HOURS=168
+            # RASPY4 tiene el puerto 1984 explícito en la URL para evitar errores de conexión
+            - DOCKER_HOSTS=Local|unix://var/run/docker.sock;RASPY4F|ssh://raspy4f;RASPY4|ssh://raspy4:1984;RASPY4B|ssh://raspy4b;RASPY4D|ssh://raspy4d;RASPY5|ssh://raspy5;RASPY4E|ssh://raspy4e
+            #- TELEGRAM_GROUP=
+            #- TELEGRAM_THREAD=1
+            #- BUTTON_COLUMNS=2
+            #- LANGUAGE=ES
+            #- EXTENDED_MESSAGES=0
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /etc/localtime:/etc/localtime:ro
+            - /home/antjrobles/.ssh:/ssh-keys:ro
+            # - /ruta/para/guardar/las/programaciones:/app/schedule
+        restart: always
+        network_mode: host
+        tty: true

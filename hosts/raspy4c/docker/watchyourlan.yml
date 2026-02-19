@@ -1,0 +1,18 @@
+services:
+  wyl:
+    image: aceberg/watchyourlan:latest
+    restart: unless-stopped
+    container_name: watchyourlan
+    ports:
+      - "8840:8840"
+    volumes:
+      - ./wyl:/data/WatchYourLAN
+    environment:
+      TZ: Europe/Madrid
+      IFACES: "vmbr0"
+      HOST: "0.0.0.0"
+      PORT: "8840"
+      TIMEOUT: "120"
+      SHOUTRRR_URL: ""
+      THEME: "sand"
+      COLOR: "dark"

@@ -1,0 +1,14 @@
+services:
+    cove:
+        image: anacrolix/cove:v0.5.1
+        ports:
+            - '42069:42069/udp'
+            - '42069:42069/tcp'
+            - '8325:8080/tcp'
+        container_name: cove
+        restart: always
+
+
+  # Puede funcionar
+  # anacrolix/cove:v0.5.1
+

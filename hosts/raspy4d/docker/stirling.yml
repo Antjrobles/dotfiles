@@ -1,0 +1,11 @@
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    ports:
+      - '6094:8080'
+    volumes:
+      - ./trainingData:/usr/share/tesseract-ocr/4.00/tessdata #Required for extra OCR languages
+      - ./extraConfigs:/configs
+      - ./customFiles:/customFiles/
+    container_name: stirling-pdf
+    restart: always

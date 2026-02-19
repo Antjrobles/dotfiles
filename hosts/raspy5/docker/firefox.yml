@@ -1,0 +1,24 @@
+---
+services:
+  firefox:
+    image: lscr.io/linuxserver/firefox:latest
+    container_name: firefox
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - FIREFOX_CLI=https://www.linuxserver.io/ #optional
+    volumes:
+      - ./config:/config
+    ports:
+      - 6902:3000
+      - 6901:3001
+    shm_size: "1gb"
+    labels:
+      glance.name: Firefox
+      glance.icon: di:firefox
+      glance.url: https://firefox.antjrobles.tech
+      glance.description: Firefox Browser
+    restart: unless-stopped

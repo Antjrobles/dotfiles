@@ -1,0 +1,12 @@
+services:
+  code-server:
+    image: codercom/code-server:latest
+    container_name: code-server
+    environment:
+      - PASSWORD=password
+    volumes:
+      - /:/workspace  # Acceso completo al sistema
+    ports:
+      - "8230:8080"
+    restart: unless-stopped
+    network_mode: host

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  vscodium_personalizado:
+    image: lscr.io/linuxserver/vscodium:latest
+    container_name: vscodium
+    cap_add:
+      - IPC_LOCK
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - CUSTOM_USER=antjrobles
+      - PASSWORD=antjrobles
+    volumes:
+      - ./config:/config       # ← PERSISTE ajustes/extensiones
+      - /:/workspace
+    ports:
+      - "3002:3000"
+      - "3003:3001"
+    hostname: vscodium
+    shm_size: "1gb"
+    extra_hosts:
+      - "vscodium:127.0.0.1"
+    restart: unless-stopped

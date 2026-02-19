@@ -1,0 +1,25 @@
+services:
+    app:
+        container_name: mydrive
+        image: kylehoell/mydrive:sha-bae5dbb
+        user: "1000:1000"
+        restart: always
+        volumes:
+            - /home/antjrobles/ourdrive/data:/data/
+            - /home/antjrobles/ourdrive/temp:/temp/
+        ports:
+            - "${HTTP_PORT:-3551}:3000"
+        env_file:
+            - .env
+
+    mongo:
+        image: mongo:8
+        container_name: mongo-mydrive
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: mydrive
+            MONGO_INITDB_ROOT_PASSWORD: mydrive
+        expose:
+            - 27017
+        volumes:
+            - /home/antjrobles/ourdrive/db:/data/db

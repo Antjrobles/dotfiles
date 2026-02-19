@@ -1,0 +1,34 @@
+services:
+  server:
+    image: yooooomi/your_spotify_server
+    restart: always
+    container_name: spotify-server
+    ports:
+      - "8091:8080"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    environment:
+      API_ENDPOINT: http://192.168.0.26:8091 # This MUST be included as a valid URL in the spotify dashboard (see below)
+#      API_ENPOINT: https://spotify-serv.antjrobles.tech
+      CLIENT_ENDPOINT: http://192.168.0.26:3013
+#      CLIENT_ENPOINT: https://spotify.antjrobles.tech
+      SPOTIFY_PUBLIC: b88c97c434184f52ac8b049276e1b73c
+      SPOTIFY_SECRET: 6e540d548aaa442ab0c77766f89799ed
+  mongo:
+    container_name: mongo
+    image: mongo:4.2.19
+    restart: always
+    volumes:
+      - /home/antjrobles/appdata/spotify/spotify_db:/data/db
+
+  web:
+    image: yooooomi/your_spotify_client
+    restart: always
+    container_name: spotify-client
+    ports:
+      - "3013:3000"
+    environment:
+      API_ENDPOINT: http://192.168.0.26:8091
+#      API_ENPOINT: https://spotify-serv.antjrobles.tech

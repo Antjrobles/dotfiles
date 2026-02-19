@@ -1,0 +1,35 @@
+services:
+  app:
+    image: matomo:latest
+    container_name: matomo
+    restart: always
+    volumes:
+#      - data:/var/www/html
+      - ./config:/var/www/html/config:rw
+    environment:
+      MATOMO_DATABASE_HOST: db
+      VIRTUAL_HOST: matomo.antjrobles.tech
+    ports:
+      - 8167:80
+    depends_on:
+      - db
+
+  db:
+    image: lscr.io/linuxserver/mariadb
+    container_name: matomodb
+#    command: --max-allowed-packet=64MB
+    restart: always
+    volumes:
+      - /home/antjrobles/appdata/matomo/db/config:/config
+    environment:
+      - PUID:1001
+      - PGID:1001
+      - TZ:Europe/Madrid
+    env_file:
+      - matomo.env
+    ports:
+      - 3302:3306
+
+volumes:
+  db:
+  data:

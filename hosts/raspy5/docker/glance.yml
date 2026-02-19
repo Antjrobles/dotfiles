@@ -1,0 +1,16 @@
+services:
+  glance:
+    container_name: glance
+    image: glanceapp/glance:latest
+    restart: always
+    volumes:
+      - ./config:/app/config
+      - /home/antjrobles/appdata/glance/glance-assets:/app/assets
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      glance.name: Glance
+      glance.icon: di:glance
+      glance.url: https://glance.antjrobles.tech
+      glance.description: Dashboard Server
+    ports:
+      - 8078:8080
