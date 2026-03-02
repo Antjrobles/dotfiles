@@ -1,21 +1,16 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your Oh My Zsh installation.
+# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
+# load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
+ZSH_THEME="agnoster"
+#ZSH_THEME="rkj-repos"
+#ZSH_THEME="amuse"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -76,8 +71,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,45 +80,52 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=es_ES.UTF-8
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='nvim'
+#   export EDITOR='mvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
+# export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# aliases (definidos por mi)
 
-alias mm="rclone mount --allow-other --allow-non-empty --daemon gdrive:/home/antjrobles/gdrive/"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+autoload -Uz compinit
+compinit
+_comp_options+=(globdots)
+
+
+# MI PERSONAL CONFIG #
+# aliases (definidos por mi)
+alias aa="cd /mnt/MIHDD/Appdata"
+alias mm="rclone mount --allow-other --allow-non-empty --daemon gdrive: /home/antjrobles/gdrive/"
 alias upd="sudo apt update && sudo apt dist-upgrade"
 alias mem10="ps auxf | sort -nr -k 4 | head -10"
 alias mem2="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -10"
 alias cpu10="ps auxf | sort -nr -k 3 | head -10"
 alias freeswap="swapoff -a && swapon -a"
 alias dc="docker-compose down && docker-compose up -d"
-alias ll="ls"
+alias ll="ls -lh"
 alias nn="sudo nano docker-compose.yml"
 alias vv="sudo nvim"
+alias i="sudo apt-get install "
+alias ..="cd .."  
 alias i="sudo apt-get install"
 alias ports='echo "sudo netstat -tulpn | grep LISTEN | grep :80"'
-alias ..="cd .." 
-alias ...="../.."
 alias grep="grep --color=auto"
 alias reload="source ~/.zshrc"
 alias c='clear'
@@ -133,39 +134,67 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias off='sudo reboot -h now'
 alias myip="curl http://ipecho.net/plain; echo"
-alias iplocal="ip route get 1 | awk '{print $7}'"
 
-#TMUX
-alias tm="tmux" 
-alias ta="tmux attach -t"
-alias tl="tmux ls"
-alias tk="tmux kill-server"
-alias tn="tmux new -s"
 
 # BATCAT
-#alias cat="batcat"
+alias bat="batcat"
 
+# NALA
+alias nala="sudo nala"
 
 #GIT
 alias gs="git status"
 alias ga="git add ."
 alias gca="git commit -m \" added\""
-alias gp="git push" 
-alias gf="git fetch origin"
-
+alias gp="git push"  
 # EXA aliases
 alias ls='exa --icons --group-directories-first'
 alias ll='exa -lg --icons --group-directories-first --time-style long-iso'
 alias la='exa -lag --icons --group-directories-first --time-style long-iso'
 
-#FZF
-alias fzfp=fzf --preview='cat {}'
+# TMUX
+alias tm="tmux"
 
-# NALA
-alias nala="sudo nala"
 
+# First neofetch must be installed
+neofetch
+
+# Starship
 eval "$(starship init zsh)"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#RIPGREP CONFIG 
+rgf() {
+    local file
+    file=$(rg --files --hidden --no-ignore --no-messages --follow --glob "!.git" 2> /dev/null | fzf +m -q "$1" --preview "bat --style=numbers --color=always {} 2> /dev/null | head -500")
+    if [[ -n "$file" ]]; then
+        bat --style=numbers --color=always "$file"
+    fi
+}
+
+
+
+export PATH=$PATH:/home/antjrobles/.cargo/bin
+
+
+
+# Buscar el en historial con fzf
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+fi
+
+if [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]; then
+  source /usr/share/doc/fzf/examples/completion.zsh
+fi
+
+
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -1,2 +1,5 @@
 [credential]
 	helper = store
+[user]
+	email = antjrobles@users.noreply.github.com
+	name = Antonio Robles
