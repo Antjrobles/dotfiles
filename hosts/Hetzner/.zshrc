@@ -116,11 +116,11 @@ source $ZSH/oh-my-zsh.sh
   alias ll='ls -l --color=auto'
 # --- ALIAS DOCKER (Para LocalGuard) ---
   alias d='docker'
-  alias dc='docker compose -f docker-compose.prod.yml'
-  alias dcu='docker compose -f docker-compose.prod.yml up -d'
-  alias dcd='docker compose -f docker-compose.prod.yml down'
-  alias dcl='docker compose -f docker-compose.prod.yml logs -f'
-  alias dcr='docker compose -f docker-compose.prod.yml restart'
+  alias dc='docker compose -f docker-compose.yml'
+  alias dcu='docker compose -f docker-compose.yml up -d'
+  alias dcd='docker compose -f docker-compose.yml down'
+  alias dcl='docker compose -f docker-compose.yml logs -f'
+  alias dcr='docker compose -f docker-compose.yml restart'
   alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
 # --- ALIAS GIT ---
   alias g='git'
@@ -144,3 +144,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # OpenClaw Completion
 source "/home/antjrobles/.openclaw/completions/openclaw.zsh"
+export PATH="$HOME/.local/bin:$PATH"
